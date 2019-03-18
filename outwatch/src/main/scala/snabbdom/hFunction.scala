@@ -1,7 +1,6 @@
 package snabbdom
 
 import com.github.ghik.silencer.silent
-import org.scalajs.dom
 import org.scalajs.dom._
 
 import scala.scalajs.js
@@ -359,7 +358,11 @@ object VNodeProxy {
     }
 
     def removeAllProps(elem: Element): Unit = {
-      elem.asInstanceOf[js.Dictionary[String]].clear()
+      js.Object.keys(elem).foreach { key =>
+        // use Reflect.deleteProperty, because it does not crash like delete on non-configurable props
+        // see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect/deleteProperty
+        window.asInstanceOf[js.Dynamic].Reflect.deleteProperty(elem, key)
+      }
     }
 
     def removeAllDomChildren(parentNode: Element) = {
