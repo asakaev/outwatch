@@ -8,7 +8,7 @@ lazy val jsdocs = project
 
 lazy val docs = project
   .in(file("outwatch-docs")) // important: it must not be docs/
-  .enablePlugins(MdocPlugin, DocusaurusPlugin)
+  .enablePlugins(MdocPlugin)
   .settings(
     mdocJS := Some(jsdocs),
     mdocJSLibraries := webpack.in(jsdocs, Compile, fullOptJS).value,
