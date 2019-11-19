@@ -426,6 +426,42 @@ class RepairDomSpec extends JSDomAsyncSpec {
     )
   }
 
+  it should "preserve styles" in {
+    testCase(
+      vNode = div(cls := "button", color := "tomato"),
+      corruption = { _ =>
+      }
+    )
+  }
+
+  it should "preserve styles with added style" in {
+    testCase(
+      vNode = div(cls := "button", color := "tomato"),
+      corruption = { elem =>
+        elem.style.setProperty("margin", "2px")
+      }
+    )
+  }
+
+   it should "fix style with added style attribute" in {
+     testCase(
+       vNode = div(cls := "button", color := "tomato"),
+       corruption = { elem =>
+         elem.setAttribute("style", "margin:3px")
+       }
+     )
+   }
+
+   it should "fix style attribute when there are other attributes" in {
+     testCase(
+       vNode = div(cls := "button"),
+       corruption = { elem =>
+         elem.setAttribute("style", "margin:3px")
+       }
+     )
+   }
+
+
   // props
   "RepairDom: Props" should "removed prop" in {
     testCase(

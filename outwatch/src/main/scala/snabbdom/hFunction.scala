@@ -272,11 +272,13 @@ object VNodeProxy {
               while(i >= 0) {
                 val currentAttribute = elem.attributes(i)
                 val name = currentAttribute.name
-                proxyAttributes.raw(name) match {
-                  case JSDefined(value) =>
-                    elem.setAttribute(name, value.toString)
-                  case _                =>
-                    elem.removeAttribute(name)
+                if(name != "style") {
+                  proxyAttributes.raw(name) match {
+                    case JSDefined(value) =>
+                      elem.setAttribute(name, value.toString)
+                    case _                =>
+                      elem.removeAttribute(name)
+                  }
                 }
                 i -= 1
               }
