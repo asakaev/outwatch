@@ -317,7 +317,7 @@ object VNodeProxy {
                 }
                 i -= 1
               }
-              // add remaining attributes
+              // add remaining styles
               proxyStyles.keys.foreach { name =>
                 val value = proxyStyles(name)
                 elem.style.setProperty(name, value.asInstanceOf[String])
