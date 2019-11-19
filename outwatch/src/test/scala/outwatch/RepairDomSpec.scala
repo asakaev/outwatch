@@ -341,6 +341,14 @@ class RepairDomSpec extends JSDomAsyncSpec {
     )
   }
 
+  it should "preserve style attributes" in {
+    testCase(
+      vNode = div(attr("style") := "color: tomato"),
+      corruption = { _ =>
+      }
+    )
+  }
+
   // data attributes
   // since outwatch currently does not use the snabbdom dataset module,
   // (https://github.com/snabbdom/snabbdom#the-dataset-module)

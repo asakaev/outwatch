@@ -248,8 +248,8 @@ object VNodeProxy {
           // console.log(" "*level + s"setting textContent: $text")
           elm.textContent = text
         case _               =>
-          repairAttributes(proxy, elm)
           repairStyles(proxy, elm)
+          repairAttributes(proxy, elm) // attributes could add the style attribute
 
           proxy.children match {
             case JSDefined(childProxies) =>
